@@ -40,15 +40,18 @@
     For more information, please contact iText Software Corp. at this
     address: sales@itextpdf.com
  */
-namespace iTextSharp.text.pdf.security {
+namespace iTextSharp.text.pdf.security
+{
     /**
      * A dictionary that stores the name of the application that signs the PDF.
      */
 
-    internal class PdfSignatureAppDictionary : PdfDictionary {
+    internal class PdfSignatureAppDictionary : PdfDictionary
+    {
 
         /** Creates new PdfSignatureAppDictionary */
-        public PdfSignatureAppDictionary() : base() {
+        public PdfSignatureAppDictionary() : base()
+        {
         }
 
         /**
@@ -57,8 +60,19 @@ namespace iTextSharp.text.pdf.security {
          * 
          * @param name
          */
-        virtual public string SignatureCreator {
+        virtual public string SignatureCreator
+        {
             set { Put(PdfName.NAME, new PdfString(value, TEXT_UNICODE)); }
+        }
+        PdfSignatureAppDictionary GetPdfSignatureAppProperty()
+        {
+            PdfSignatureAppDictionary appPropDic = (PdfSignatureAppDictionary)GetAsDict(PdfName.APP);
+            if (appPropDic == null)
+            {
+                appPropDic = new PdfSignatureAppDictionary();
+                Put(PdfName.APP, appPropDic);
+            }
+            return appPropDic;
         }
     }
 }
